@@ -150,8 +150,9 @@ func (p *Parser) parseLetStatement() *ast.LetStatement {
 	if !p.expectPeek(token.ASSIGN) {
 		return nil
 	}
+	p.nextToken()
 
-	// TODO: Expressions!
+	stmt.Value = p.parseExpression(LOWEST)
 
 	// Wait for a semicolon to end the LET
 	for !p.curTokenIs(token.SEMICOLON) {
